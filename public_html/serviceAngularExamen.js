@@ -32,7 +32,6 @@ document.write("Jugador Max. puntuación: ");
 document.write(equipo.getJugadorMaxPuntos().nombre);
 document.write("<br>");
 
-
 document.write("<br>");
 document.write("Jugadores <br>");
 document.write("Nickname jugador: ");
@@ -89,7 +88,7 @@ function Jugador(nickname, nombre, funcion, puntos){
     this.nickname = nickname || "";
     this.nombre = nombre || "";
     this.funcion = funcion || "";
-    this.puntos = puntos || "";
+    this.puntos = puntos || 0;
     
     Jugador.updateJugador = function(nombre,funcion,puntos){
     this.nombre= nombre || this.nombre;

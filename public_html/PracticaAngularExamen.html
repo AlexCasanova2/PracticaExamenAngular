@@ -76,17 +76,17 @@
                 </div>
                 <div class="col-lg-3">
                     Tipo juego: {{equipos[select].tipo}} <br>
-                    Jugador MAx Puntos: {{equipos[select].}}
+                    Jugador MAx Puntos: 
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <button value="Crearequipo">Crear Equipo</button>
+                    
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-3">
-                    Jugador 
+                    
                 </div>
                 <div class="col-lg-3">
                     Puntos 
@@ -98,12 +98,18 @@
                     Función 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 botones">
-                    <button value="Crearjugador">Crear Jugador</button>
+                <div class="row" ng-repeat="key in jugadores track by $index" ng-value="$index">
+                <div class="col-lg-3">
+                    <button value="eliminar">Eliminar</button>
                 </div>
-                 <div class="col-lg-6 botones">
-                    <button value="Modificarjugador">Modificar Jugador</button>
+                 <div class="col-lg-3">
+                    {{equipos[select].jugadores[puntos]}}
+                </div>
+                <div class="col-lg-3">
+                    {{equipos[select].jugadores[nickname]}}
+                </div>
+                <div class="col-lg-3">
+                    {{equipos[select].jugadores[funcion]}}
                 </div>
             </div>
             </div>
