@@ -47,16 +47,18 @@ document.write("Puntos jugador: ");
 document.write(jugador.puntos);
 
 
-function Equipo(){
+function Equipo(nombre, victorias, derrotas, tipo){
     this.nombre;
     this.victorias;
     this.derrotas;
     this.tipo;
-    this.jugadores = new Array();
+    this.jugadores = [];
     
     
     this.addJugador = function (jugador){
     this.jugadores[jugador.nickname]=jugador;
+
+        this.jugadores.push(jugador);
    
     };
     
@@ -65,12 +67,12 @@ function Equipo(){
     };
     
     this.delJugador = function(nickname){
-        for(var i; jugadores.size();i++){
-            if(this.nickname=nickname){
-                jugadores.splice(i,1);
+        for(var i=0;i< this.jugadores.length;i++){
+            if(this.jugadores[i].nickname == nickname){
+                this.jugadores.splice(i,1);
+                i=this.jugadores.length;
             }
         }
-        delete this.jugadores[nickname];
     };
     
     this.getJugadorMaxPuntos = function(){
@@ -82,6 +84,10 @@ function Equipo(){
         }
         return max;
     };
+    
+//     this.borrarJugador2 = function($index){
+//         this.jugadores.splice($index, 1);
+//    };
 };
 
 function Jugador(nickname, nombre, funcion, puntos){
@@ -90,15 +96,12 @@ function Jugador(nickname, nombre, funcion, puntos){
     this.funcion = funcion || "";
     this.puntos = puntos || 0;
     
-    Jugador.updateJugador = function(nombre,funcion,puntos){
+    this.updateJugador = function(nombre,funcion,puntos){
     this.nombre= nombre || this.nombre;
     this.funcion=funcion || this.funcion;
     this.puntos = puntos || this.puntos;
     };
 }
-
-
-
 
 app.service("serv", function(){
     this.equipos = [];
@@ -113,16 +116,32 @@ app.service("serv", function(){
         this.equipos.push(e);
     };
     
-    this.crearJugador = function(nickname, nombre, funcion, puntos){
-        var j = new Jugador(nickname, nombre, funcion, puntos);
-        j.nickname = nickname;
-        j.nombre = nombre;
-        j.funcion = funcion;
-        j.puntos = puntos;
-        this.jugadores.push(j);
+    this.crearJugador = function(nickname, nombre, funcion, puntos, equipo){
+        if(equipo == null || nickname == ""){
+            console.log("no hay equipo");
+        }else{
+            
+            var j = new Jugador(nickname, nombre, funcion, puntos);
+            var i = false ;
+            
+            for(key in this.equipos[equipo].jugadores){
+                if(this.equipos[equipo].jugadores[key].nickname == nickname){
+                    j.updateJugador(nombre,funcion, puntos);
+                    this.equipos[equipo].jugadores[key] = j;
+                    i= true;
+                }
+            }
+            if(!i){
+                this.equipos[equipo].addJugador(j);
+                console.log("jugador añadido");
+            }
+        }
     };
     
+    this.borrarJugador = function(select,nickname){
+        this.equipos[select].delJugador(nickname);
+    };
     
-    
+  
     
 });

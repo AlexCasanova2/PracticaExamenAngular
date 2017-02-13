@@ -47,11 +47,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 botones">
-                    <button value="Crearjugador">Crear Jugador</button>
-                </div>
-                 <div class="col-lg-6 botones">
-                    <button value="Modificarjugador">Modificar Jugador</button>
+                <div class="col-lg-12 botones">
+                    <div ng-click="crearJugador()" id="crear">Crear/Modificar Jugador</div>
                 </div>
             </div>
         </div>
@@ -59,59 +56,63 @@
         <h1> {{prueba}}</h1>
             
             <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    Nombre Equipo 
-                    <select ng-model="select">
-                        <option ng-repeat="key in equipos track by $index" ng-value="$index">
-                            {{key.nombre}}
-                        </option>    
-                    </select>
-                </div>
-                <div class="col-lg-3">
-                    Victorias: {{equipos[select].victorias}}
-                </div>
-                <div class="col-lg-3">
-                    Derrotas: {{equipos[select].derrotas}} 
-                </div>
-                <div class="col-lg-3">
-                    Tipo juego: {{equipos[select].tipo}} <br>
-                    Jugador MAx Puntos: 
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        Nombre Equipo 
+                        <select ng-model="select">
+                            <option ng-repeat="key in equipos track by $index" ng-value="$index">
+                                {{key.nombre}}
+                            </option>    
+                        </select>
+                    </div>
                     
+                    <div class="col-lg-3">
+                        Victorias: {{equipos[select].victorias}}
+                    </div>
+                    <div class="col-lg-3">
+                        Derrotas: {{equipos[select].derrotas}} 
+                    </div>
+                    <div class="col-lg-3">
+                        Tipo juego: {{equipos[select].tipo}} <br>
+                        Jugador MAx Puntos: 
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    
+                <div class="row">
+                    <div class="row" id="puntos">
+                        <div class="col-lg-1">
+                            
+                        </div>
+                        <div class="col-lg-3">
+                             Puntos
+                        </div>
+                        <div class="col-lg-2">
+                            Nick
+                        </div>
+                        <div class="col-lg-3">
+                           Nombre
+                        </div>
+                        <div class="col-lg-3">
+                            Funcion
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    Puntos 
+                <div class="row" ng-repeat="key in equipos[select].jugadores track by $index" id="valores">
+                    <div class="col-lg-1">
+                        <div ng-click="borrar(select,key.nickname)">{{borrar}}Eliminar</div>
+                    </div>
+                    <div class="col-lg-3">
+                        {{key.puntos}}
+                    </div>
+                    <div class="col-lg-2" ng-click="valoresJugador($index, select)">
+                        {{key.nickname}}
+                    </div>
+                    <div class="col-lg-3">
+                        {{key.nombre}}
+                    </div>
+                    <div class="col-lg-3">
+                        {{key.funcion}}
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    Nick 
-                </div>
-                <div class="col-lg-3">
-                    Función 
-                </div>
-            </div>
-                <div class="row" ng-repeat="key in jugadores track by $index" ng-value="$index">
-                <div class="col-lg-3">
-                    <button value="eliminar">Eliminar</button>
-                </div>
-                 <div class="col-lg-3">
-                    {{equipos[select].jugadores[puntos]}}
-                </div>
-                <div class="col-lg-3">
-                    {{equipos[select].jugadores[nickname]}}
-                </div>
-                <div class="col-lg-3">
-                    {{equipos[select].jugadores[funcion]}}
-                </div>
-            </div>
             </div>
         
     </body>
